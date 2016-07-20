@@ -11,23 +11,15 @@ $name-font: $heading-font;
 $name-font-wt: 700;
 $name-font-size: 32px;
 
-@mixin name-style() {
-    font-family: $name-font;
-    font-size: $name-font-size;
-    font-weight: $name-font-wt;
-    padding-top: 150px;
-    padding-left: 200px;
-}
-
 $body-font: 'Lato', sans-serif;
 $body-font-wt: 400;
-$body-font-size: 14px;
+$body-font-size: $em-base;
 
 $subheading-font: $body-font;
 $subheading-font-wt: 400;
 $subheading-font-size: $body-font-size;
 $subheading-font-style: italic;
 
-.name {
-    @include name-style;
+#top-header, main, footer {
+    @include outer-container;
 }
