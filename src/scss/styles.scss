@@ -1,25 +1,62 @@
-@import "bourbon";
-@import "neat";
+@import "bootstrap";
+@import "font-awesome";
 @import url(https://fonts.googleapis.com/css?family=Amiri:400,700|Lato:400,400i,700);
 
 // font styles
 $heading-font: 'Amiri', serif;
 $heading-font-wt: 400;
-$heading-font-size: 18px;
+$heading-font-size: 1.25rem;
 
 $name-font: $heading-font;
 $name-font-wt: 700;
-$name-font-size: 32px;
+$name-font-size: 2rem;
 
 $body-font: 'Lato', sans-serif;
 $body-font-wt: 400;
-$body-font-size: $em-base;
+$body-font-size: .875rem;
 
 $subheading-font: $body-font;
 $subheading-font-wt: 400;
 $subheading-font-size: $body-font-size;
 $subheading-font-style: italic;
 
-#top-header, main, footer {
-    @include outer-container;
+@mixin name-font() {
+    font-family: $name-font;
+    font-weight: $name-font-wt;
+    font-size: $name-font-size;
+}
+
+@mixin body-font() {
+    font-family: $body-font;
+    font-size: $body-font-size;
+    font-weight: $body-font-wt;
+}
+
+.name {
+    @include name-font;
+}
+
+header {
+    font-family: $heading-font;
+}
+
+p, 
+.job-body,
+.my-info {
+    font-family: $body-font;
+    font-size: $body-font-size;
+}
+
+h3 {
+    font-family: $heading-font;
+    font-weight: 700;
+    font-size: $heading-font-size;
+}
+
+.job-title {
+    font-weight: 700;
+}
+
+.job-loc > span {
+    font-style: italic;
 }

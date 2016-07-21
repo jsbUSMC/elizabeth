@@ -5,27 +5,32 @@ var util = require("gulp-util");
 var sass = require("gulp-sass");
 var autoprefixer = require("gulp-autoprefixer");
 var cleanCSS = require("gulp-clean-css");
+var minifyCss = require("gulp-minify-css");
 var uglify = require("gulp-uglify");
 var gzip = require("gulp-gzip");
 var concat = require("gulp-concat");
 var sourcemaps = require("gulp-sourcemaps");
 var rename = require("gulp-rename");
-var bourbon = require("node-bourbon").includePaths;
-var neat = require("node-neat").includePaths;
+var plumber = require("gulp-plumber");
+
+var config = {
+  bsScss: './node_modules/bootstrap/scss',
+  faScss: './src/font-awesome/scss'
+};
 
 // compile scss
 gulp.task("styles", function() {
-  gulp.src("src/scss/**/*.scss")
+  return gulp.src("src/scss/**/*.scss")
+    .pipe(plumber())
     .pipe(sourcemaps.init())
     .pipe(sass({
-      includePaths: bourbon, 
-      includePaths: neat
+      includePaths: [config.bsScss, config.faScss]
     }))
-    .pipe(autoprefixer())
-    .pipe(concat("all.css"))
-    .pipe(rename("all.min.css"))
-    .pipe(cleanCSS())
-    .pipe(sourcemaps.write())
+    .pipe(sourcemaps.write({includeContent: false, sourceRoot: null}))
+    .pipe(autoprefixer({browsers: ["last 1 version"]}))
+    .pipe(gulp.dest('dist/css'))
+    .pipe(rename({suffix: ".min"}))
+    .pipe(minifyCss())
     .pipe(gulp.dest("dist/css"));
 });
 
